@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import "@fontsource-variable/montserrat";
 useHead({
+  title: "PRO32",
   link: [
     {
       href: "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css",
@@ -12,22 +13,21 @@ useHead({
   ],
 });
 
-const { data, status } = await useLazyFetch("/api/partners", {
-  key: "partners",
-  server: false,
-});
+const store = usePartnersStore();
+const { filteredPartners, status } = storeToRefs(store);
 </script>
 <template>
   <div class="page">
     <div class="container">
       <app-header />
-      <div class="block">
+      <app-loader v-if="status === 'pending'" />
+      <div class="block" v-if="filteredPartners.value && status === 'success'">
         <app-filter />
         <div class="item">
-          <app-loader v-if="status === 'pending'" />
-          <div v-if="data && status === 'success'">
-            <partner-card v-for="partner in data.partners" v-bind="partner" />
-          </div>
+          <partner-card
+            v-for="partner in filteredPartners.value.partners"
+            v-bind="partner"
+          />
         </div>
       </div>
     </div>
