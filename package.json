@@ -1,0 +1,26 @@
+{
+  "name": "pro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@fontsource-variable/montserrat": "^5.1.0",
+    "@nuxt/image": "^1.8.1",
+    "nuxt": "^3.14.1592",
+    "sass": "^1.82.0",
+    "vue": "latest",
+    "vue-router": "latest",
+    "@pinia/nuxt": "^0.5.1",
+    "pinia": "^2.2.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vue-tsc": "^2.1.10"
+  }
+}
