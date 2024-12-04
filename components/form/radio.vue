@@ -1,20 +1,14 @@
 <script setup lang='ts'>
-const props = defineProps<{ radio: string[], active: string }>()
+const props = defineProps<{ radio: string[] }>()
 const model = defineModel()
 </script>
 <template>
-    <div class="block">
-        <template v-for="type in displayFilters.productType">
-            <input type="radio" class="btn-check" name="productTypes" :id="type" autocomplete="off" :value="type"
+    <form-tags>
+        <template v-for="type in props.radio" :key="type">
+            <input type="radio" class="btn-check" :name="type" :id="type" autocomplete="off" :value="type"
                 v-model="model" />
-            <label class="btn rounded-pill" :class="activeFilters.productType === type ? 'btn-dark' : 'btn-secondary'"
-                :for="type">{{ type }}</label>
+            <label class="btn rounded-pill" :class="model === type ? 'btn-dark' : 'btn-secondary'" :for="type">{{ type
+                }}</label>
         </template>
-    </div>
+    </form-tags>
 </template>
-<style scoped lang='scss'>
-.block {
-    display: flex;
-    gap: 4px;
-}
-</style>

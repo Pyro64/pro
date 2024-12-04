@@ -12,3 +12,11 @@ export type Partner = {
   products: string[];
   partnerType: string[];
 };
+
+export type Filters = {
+  partnerType: string[];
+  country: string[];
+  city: string[];
+  productType: string[];
+  products: string[];
+};

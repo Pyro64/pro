@@ -24,10 +24,7 @@ const { filteredPartners, status } = storeToRefs(store);
       <div class="block" v-if="filteredPartners.value && status === 'success'">
         <app-filter />
         <div class="item">
-          <partner-card
-            v-for="partner in filteredPartners.value.partners"
-            v-bind="partner"
-          />
+          <partner-card v-for="partner in filteredPartners.value.partners" v-bind="partner" :key="partner.id" />
         </div>
       </div>
     </div>
@@ -44,6 +41,7 @@ const { filteredPartners, status } = storeToRefs(store);
   display: flex;
   gap: 70px;
 }
+
 .item {
   flex-grow: 1;
 }

@@ -7,23 +7,25 @@ const { activeFilters } = storeToRefs(store);
   <div class="filter" v-if="displayFilters">
     <p class="title">Уточните адрес</p>
     <div class="selects">
-      <select class="form-select form-select-lg" aria-label="Выбор страны" v-model="activeFilters.country">
-        <option :value="null" disabled>Страна</option>
-        <option :value="option" v-for="option in displayFilters.country">
-          {{ option }}
-        </option>
-      </select>
-      <select class="form-select form-select-lg" aria-label="Выбор города" placeholder="Город"
-        v-model="activeFilters.city">
-        <option :value="null" disabled>Город</option>
-        <option :value="option" v-for="option in displayFilters.city">
-          {{ option }}
-        </option>
-      </select>
+      <form-select v-model="activeFilters.country" :options="displayFilters.country" placeholder="Страна" />
+      <form-select v-model="activeFilters.city" :options="displayFilters.city" placeholder="Город" />
     </div>
-    <!-- <form-radio radio="" /> -->
-    <!-- прокинуть 2 v-model и массив для отрисовки -->
     <p class="titile">Выберите тип продукта</p>
+    <form-radio :radio="displayFilters.productType" v-model="activeFilters.productType" />
+    <p class="titile">Выберите продукт</p>
+    <form-radio :radio="displayFilters.products" v-model="activeFilters.products" />
+    <p class="titile">Выберите тип партнёра</p>
+    <form-tags>
+      <template v-for="option in displayFilters.partnerType" :key="option">
+        <input type="checkbox" class="btn-check" :id="option" autocomplete="off" :value="option"
+          v-model="activeFilters.productType" />
+        <label class="btn rounded-pill btn-outline-dark checkbox" :for="option">{{ option }}</label>
+      </template>
+    </form-tags>
+    <div class="buttons">
+      <button type="button" class="btn btn-lg btn-outline-dark ">Очистить</button>
+      <button type="button" class="btn btn-lg btn-outline-success search">Очистить</button>
+    </div>
 
   </div>
 </template>
@@ -43,5 +45,31 @@ const { activeFilters } = storeToRefs(store);
   font-size: 14px;
   margin-bottom: 15px;
   color: #9999a2;
+}
+
+.checkbox {
+  background: #6c757d;
+  color: #fff;
+
+  &:hover {
+    background-color: #5c636a;
+    border-color: #565e64;
+  }
+}
+
+.search {
+  color: #00A5AD;
+  border-color: #00A5AD;
+
+  &:hover {
+    background-color: #00A5AD;
+    color: #fff;
+  }
+}
+
+.buttons {
+  margin-top: 40px;
+  display: flex;
+  gap: 9px;
 }
 </style>

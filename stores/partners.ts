@@ -1,10 +1,4 @@
-type Filters = {
-  partnerType: string[];
-  country: string[];
-  city: string[];
-  productType: string[];
-  products: string[];
-};
+import type { Filters } from "~/types/partner.type";
 
 export const usePartnersStore = defineStore("partners", () => {
   const { data, status } = useLazyFetch("/api/partners", {
@@ -47,7 +41,8 @@ export const usePartnersStore = defineStore("partners", () => {
   const activeFilters = ref({
     country: null,
     city: null,
-    productType: null,
+    productType: [],
+    products: null,
   });
   const filteredPartners = computed(() => data);
 
