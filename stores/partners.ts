@@ -55,6 +55,11 @@ export const usePartnersStore = defineStore("partners", () => {
     partnerType: []
   });
 
+  const showModalFilter = ref(false)
+
+  const toggleModalFilter = () => {
+    showModalFilter.value = !showModalFilter.value
+  }
   const getFilteredPartners = () => {
     if (data.value) {
       filteredPartners.value = data.value.partners.filter(partner => {
@@ -69,6 +74,7 @@ export const usePartnersStore = defineStore("partners", () => {
         return true;
       });
     }
+    showModalFilter.value = false
   };
 
   const clearFiltered = () => {
@@ -83,12 +89,15 @@ export const usePartnersStore = defineStore("partners", () => {
       partnerType: [],
     }
   }
+
   return {
     filteredPartners,
     status,
     displayFilters,
     activeFilters,
+    showModalFilter,
     getFilteredPartners,
-    clearFiltered
+    clearFiltered,
+    toggleModalFilter
   };
 });

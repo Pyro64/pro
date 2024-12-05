@@ -32,6 +32,10 @@ const { activeFilters } = storeToRefs(store);
 <style scoped lang="scss">
 .filter {
   width: 380px;
+
+  @media(max-width:450px) {
+    width: 100%;
+  }
 }
 
 .selects {

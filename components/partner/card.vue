@@ -54,6 +54,7 @@ const card = defineProps<Partner>();
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .info {
@@ -115,6 +116,24 @@ const card = defineProps<Partner>();
 
   &::after {
     background: #00a5ad;
+  }
+}
+
+@media(max-width:768px) {
+  .partner {
+    flex-direction: column;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+
+  .info {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 }
 </style>

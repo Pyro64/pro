@@ -9,17 +9,6 @@ body {
     margin: auto;
 }
 
-//transition atnimation
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.3s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
-
 .list-move,
 /* apply transition to moving elements */
 .list-enter-active,
