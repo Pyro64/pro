@@ -20,3 +20,11 @@ export type Filters = {
   productType: string[];
   products: string[];
 };
+
+export type ActiveFilters = {
+  country: string | null,
+  city: string | null,
+  productType: string | null,
+  products: string | null,
+  partnerType: string[]
+}

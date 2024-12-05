@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const store = usePartnersStore();
-const { displayFilters } = store;
+const { displayFilters, getFilteredPartners, clearFiltered } = store;
 const { activeFilters } = storeToRefs(store);
 </script>
 <template>
@@ -18,13 +18,13 @@ const { activeFilters } = storeToRefs(store);
     <form-tags>
       <template v-for="option in displayFilters.partnerType" :key="option">
         <input type="checkbox" class="btn-check" :id="option" autocomplete="off" :value="option"
-          v-model="activeFilters.productType" />
+          v-model="activeFilters.partnerType" />
         <label class="btn rounded-pill btn-outline-dark checkbox" :for="option">{{ option }}</label>
       </template>
     </form-tags>
     <div class="buttons">
-      <button type="button" class="btn btn-lg btn-outline-dark ">Очистить</button>
-      <button type="button" class="btn btn-lg btn-outline-success search">Очистить</button>
+      <button @click="clearFiltered" type="button" class="btn btn-lg btn-outline-dark ">Очистить</button>
+      <button @click="getFilteredPartners" type="button" class="btn btn-lg btn-outline-success search">Найти</button>
     </div>
 
   </div>

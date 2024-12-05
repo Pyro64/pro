@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/image", "@pinia/nuxt"],
   css: ["~/assets/styles/global.scss"],
   image: {
-    quality: 70,
+    quality: 100,
     format: ["webp"],
     lazy: true,
   },

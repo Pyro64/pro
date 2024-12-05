@@ -1,10 +1,19 @@
-import type { Filters } from "~/types/partner.type";
+import type { ActiveFilters, Filters, Partner } from "~/types/partner.type";
 
 export const usePartnersStore = defineStore("partners", () => {
   const { data, status } = useLazyFetch("/api/partners", {
     key: "partners",
     server: false,
   });
+  const filteredPartners = ref<Partner[]>([]);
+
+  watch(data, () => {
+    if (data.value) {
+      filteredPartners.value = data.value.partners;
+    }
+  },
+    { once: true }
+  );
 
   const displayFilters = computed<Filters | null>(() => {
     if (data.value) {
@@ -38,13 +47,48 @@ export const usePartnersStore = defineStore("partners", () => {
     }
   });
 
-  const activeFilters = ref({
+  const activeFilters = ref<ActiveFilters>({
     country: null,
     city: null,
-    productType: [],
+    productType: null,
     products: null,
+    partnerType: []
   });
-  const filteredPartners = computed(() => data);
 
-  return { filteredPartners, status, displayFilters, activeFilters };
+  const getFilteredPartners = () => {
+    if (data.value) {
+      filteredPartners.value = data.value.partners.filter(partner => {
+        const { country, city, productType, products, partnerType } = activeFilters.value;
+        if (country && partner.country !== country) return false;
+        if (city && partner.city !== city) return false;
+        if (productType && partner.productType !== productType) return false;
+        if (products && !partner.products.includes(products)) return false;
+        if (partnerType.length > 0 && !partnerType.some(type => partner.partnerType.includes(type))) {
+          return false;
+        }
+        return true;
+      });
+    }
+  };
+
+  const clearFiltered = () => {
+    if (data.value) {
+      filteredPartners.value = data.value.partners
+    }
+    activeFilters.value = {
+      country: null,
+      city: null,
+      products: null,
+      productType: null,
+      partnerType: [],
+    }
+  }
+  return {
+    filteredPartners,
+    status,
+    displayFilters,
+    activeFilters,
+    getFilteredPartners,
+    clearFiltered
+  };
 });

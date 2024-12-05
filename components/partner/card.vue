@@ -5,23 +5,13 @@ const card = defineProps<Partner>();
 </script>
 <template>
   <div class="partner">
-    <nuxt-img
-      fit="fill"
-      :placeholder="[150, 150, 20, 3]"
-      format="webp"
-      :src="`/images/partners/${card.logo.toLowerCase()}.png`"
-      :alt="card.name"
-      class="img"
-    />
+    <nuxt-img fit="fill" :placeholder="[150, 150, 20, 3]" format="webp"
+      :src="`/images/partners/${card.logo.toLowerCase()}.png`" :alt="card.name" class="img" />
     <div class="block">
       <div class="item">
         <h2 class="title">{{ card.name }}</h2>
-        <span
-          class="badge rounded-pill status"
-          :class="statusTheme(card.status)"
-        >
-          {{ card.status }}</span
-        >
+        <span class="badge rounded-pill status" :class="statusTheme(card.status)">
+          {{ card.status }}</span>
       </div>
       <div class="info">
         <nuxt-link class="link" :href="`tel:${card.phone}`">{{
@@ -30,13 +20,8 @@ const card = defineProps<Partner>();
         <nuxt-link class="link" :href="`mailto:${card.email}`">{{
           card.email
         }}</nuxt-link>
-        <nuxt-link
-          :href="`https://${card.website}`"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="website link"
-          >{{ card.website }}</nuxt-link
-        >
+        <nuxt-link :href="`https://${card.website}`" target="_blank" rel="noopener noreferrer" class="website link">{{
+          card.website }}</nuxt-link>
       </div>
     </div>
   </div>
@@ -48,32 +33,40 @@ const card = defineProps<Partner>();
   border-bottom: 1px solid #ccccd1;
   padding-bottom: 40px;
   margin-bottom: 40px;
+  transition: all 0.4s ease-in-out;
+
   &:last-child {
     margin-bottom: 0;
   }
 }
+
 .img {
   width: 100px;
   object-fit: contain;
   flex-shrink: 0;
 }
+
 .block {
   flex-grow: 1;
 }
+
 .item {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
 }
+
 .info {
   display: flex;
   gap: 25px;
 }
+
 .title {
   margin-bottom: 25px;
   font-weight: 800;
   font-size: 20px;
 }
+
 .status {
   padding-left: 16px;
   padding-right: 16px;
@@ -82,11 +75,13 @@ const card = defineProps<Partner>();
   font-size: 12px;
   font-weight: 500;
 }
+
 .link {
   text-decoration: none;
   font-size: 16px;
   color: #000;
   position: relative;
+
   &::after {
     content: "";
     transition: 0.3s ease-in-out;
@@ -97,6 +92,7 @@ const card = defineProps<Partner>();
     bottom: 0;
     background: #000;
   }
+
   &:hover {
     &::after {
       left: 50%;
@@ -104,6 +100,7 @@ const card = defineProps<Partner>();
       width: 50%;
     }
   }
+
   &:active {
     &::after {
       left: 50%;
@@ -111,9 +108,11 @@ const card = defineProps<Partner>();
     }
   }
 }
+
 .website {
   color: #00a5ad;
   font-weight: 500;
+
   &::after {
     background: #00a5ad;
   }

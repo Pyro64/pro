@@ -20,13 +20,19 @@ const { filteredPartners, status } = storeToRefs(store);
   <div class="page">
     <div class="container">
       <app-header />
-      <app-loader v-if="status === 'pending'" />
-      <div class="block" v-if="filteredPartners.value && status === 'success'">
-        <app-filter />
-        <div class="item">
-          <partner-card v-for="partner in filteredPartners.value.partners" v-bind="partner" :key="partner.id" />
+      <client-only>
+        <app-loader v-if="status === 'pending'" />
+        <div class="block" v-if="status === 'success'">
+          <app-filter />
+          <transition name="fade" mode="out-in">
+            <div v-if="filteredPartners.length === 0">Список пуст</div>
+            <transition-group name="list" tag="div" class="item" v-else>
+              <partner-card v-for="partner in filteredPartners" v-bind="partner" :key="partner.id" />
+            </transition-group>
+          </transition>
+
         </div>
-      </div>
+      </client-only>
     </div>
   </div>
 </template>
