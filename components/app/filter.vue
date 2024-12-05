@@ -3,6 +3,7 @@ const store = usePartnersStore();
 const { displayFilters, getFilteredPartners, clearFiltered } = store;
 const { activeFilters } = storeToRefs(store);
 </script>
+
 <template>
   <div class="filter" v-if="displayFilters">
     <p class="title">Уточните адрес</p>
@@ -26,9 +27,9 @@ const { activeFilters } = storeToRefs(store);
       <button @click="clearFiltered" type="button" class="btn btn-lg btn-outline-dark ">Очистить</button>
       <button @click="getFilteredPartners" type="button" class="btn btn-lg btn-outline-success search">Найти</button>
     </div>
-
   </div>
 </template>
+
 <style scoped lang="scss">
 .filter {
   width: 380px;
